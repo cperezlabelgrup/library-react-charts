@@ -12,15 +12,31 @@ type Story = StoryObj<typeof LineChart>;
 export const Default: Story = (args: LineChartProps) => (
   <div
     style={{
-      width: "600px",
-      height: "250px",
+      width: "100%",
+      height: "",
       margin: "0 auto",
+      padding: "20px",
       marginTop: 50,
-      backgroundColor: "",
+      backgroundColor: "grey",
       fontFamily: "Arial, sans-serif",
+      display: "flex",
+      justifyContent: "center",
+      flexWrap: "wrap",
+      gap: "50px",
     }}
   >
+    <div style={{
+      width: '600px',
+      height: '250px'
+    }}>
     <LineChart {...args} />
+    </div>
+    <div>
+    <LineChart {...args} />
+    </div>
+    <div>
+    <LineChart {...args} />
+    </div>
   </div>
 );
 Default.args = {

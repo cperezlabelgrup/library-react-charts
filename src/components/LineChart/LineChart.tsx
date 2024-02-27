@@ -28,7 +28,6 @@ export interface LineChartProps {
     dashed?: boolean
     stroke?: number
   }
-  verticalGuides?: boolean
   precision?: number
   xAxisLabels?: string[]
   renderToolTip?: (data: {
@@ -36,11 +35,6 @@ export interface LineChartProps {
     dataY: number
     label?: string
   }) => JSX.Element
-  options?: { value: string; label: string }[]
-  onChange?: (value: string) => void
-  title?: string
-  fontSize?: number
-  backgroundColorLine?: string
 }
 
 const STROKE = 2.8
@@ -60,6 +54,8 @@ const LineChart = ({
     dashed: false,
     stroke: 1
   },
+  width = 600,
+  height = 300,
   precision = 0,
   xAxisLabels = [],
   lineToShowPointInfo = 0,
@@ -69,8 +65,8 @@ const LineChart = ({
     width: number
     height: number
   }>({
-    width: 0,
-    height: 0
+    width: width,
+    height: height
   })
   const [mousePosition, setMousePosition] = useState<{
     x: number
@@ -311,7 +307,7 @@ const LineChart = ({
     
     }}>
       <svg
-        viewBox={` 0 0 ${dimensiones.width} ${dimensiones.height}`}
+        viewBox={` `}
         overflow={'visible'}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
