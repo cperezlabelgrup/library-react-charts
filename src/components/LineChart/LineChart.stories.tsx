@@ -13,20 +13,24 @@ type Story = StoryObj<typeof LineChart>;
 export const Default: Story = (args: LineChartProps) => (
   <div
     style={{
-      width: "60%",
-      height: "350px",
       margin: "0 auto",
-      backgroundColor: "",
+      width: "80%",
+      height: "auto",
       marginTop: 50,
       fontFamily: "Arial, sans-serif",
+      display: "flex",
+      flexWrap: "wrap",
+      gap: "50px",
     }}
   >
+    <LineChart {...args} />
     <LineChart {...args} />
   </div>
 );
 Default.args = {
   lineSets: LINE_SETS,
   xAxisLabels: LABELS,
+  width: 600,
   lineToShowPointInfo: 1,
   horizontalGuides: {
     dashed: true,

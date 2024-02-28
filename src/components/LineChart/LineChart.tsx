@@ -25,6 +25,7 @@ const LineChart = ({
     stroke: 1,
   },
   precision = 0,
+  width,
   xAxisLabels = [],
   lineToShowPointInfo = 0,
   customToolTip,
@@ -47,7 +48,6 @@ const LineChart = ({
     handleMouseLeavePoint,
   } = useLineChart(lineSets, lineToShowPointInfo, precision, refContainer);
   const [showTooltip, setShowTooltip] = React.useState(false);
- 
   return (
     <div
       ref={refContainer}
@@ -59,22 +59,18 @@ const LineChart = ({
       }
       }
       style={{
-        width: "100%",
-        height: "100%",
         backgroundColor: "",
-        padding: "10px",
+        width: width,
+        maxWidth: "100%",
       }}
     >
       <svg
         id="line-chart-component"
         viewBox={` 0 0 ${dimensiones.width} ${dimensiones.height}`}
+
         overflow={"visible"}
         onMouseMove={handleMouseMovePoint}
         onMouseLeave={handleMouseLeavePoint}
-        style={{
-          backgroundColor: "",
-          padding: "30px",
-        }}
       >
         <LabelsXAxis FONT_SIZE={FONT_SIZE} padding={padding} dimensiones={dimensiones} labels={xAxisLabels} />
         <LabelsY 

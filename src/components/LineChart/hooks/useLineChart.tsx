@@ -3,7 +3,7 @@ import { DataPoint, LineSet } from "../types";
 
 
 const useLineChart = (lineSets: LineSet[], lineToShowPointInfo: number, precision: number = 2, refContainer: React.RefObject<HTMLDivElement>) => {
-  const [dimensiones, setDimensiones] = useState({ width: 600, height: 400 });
+  const [dimensiones, setDimensiones] = useState({ width: 600, height: 200 });
   const [hoverPoint, setHoverPoint] = useState({ x: 0, y: 0, visible: false });
   const [targetPoint, setTargetPoint] = useState({
     x: 0,
@@ -90,28 +90,6 @@ const useLineChart = (lineSets: LineSet[], lineToShowPointInfo: number, precisio
     return { solidPath, dashedPath };
   };
 
-  useEffect(() => {
-    // Asumiendo que refContainer está asignado a un elemento en el DOM
-    const initialWidth = refContainer.current?.offsetWidth ?? 0;
-    const initialHeight = refContainer.current?.offsetHeight ?? 0;
-    setDimensiones({ width: initialWidth, height: initialHeight });
-    // El resto de tu efecto aquí...
-  }, []);
-
-  // coger las dimensiones del padre del id line-chart-component
-  useEffect(() => {
-    const handleResize = () => {
-      if (refContainer.current) {
-        const newWidth = refContainer.current.offsetWidth;
-        const newHeight = refContainer.current.offsetHeight;
-        setDimensiones({ width: newWidth, height: newHeight });
-      }
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [refContainer]);
 
   const handleMouseMovePoint = (e: React.MouseEvent<SVGSVGElement>) => {
     const svgRect = e.currentTarget.getBoundingClientRect();
