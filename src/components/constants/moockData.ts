@@ -1,8 +1,9 @@
-import { LineSet } from "../LineChart/LineChart";
+import { LineSet } from "../LineChart/types";
+
 export const LINE_SETS: LineSet[] = [
   {
     data: [
-      { x: 1, y: 4 },
+      { x: 1, y: 0 },
       { x: 2, y: 18 },
       { x: 3, y: 20 },
       { x: 4, y: 21 },
@@ -30,9 +31,9 @@ export const LINE_SETS: LineSet[] = [
       { x: 5, y: 40 },
       { x: 6, y: 35 },
       { x: 7, y: 43 },
-      { x: 8, y: 35 },
-      { x: 9, y: 25 },
-      { x: 10, y: 20 },
+      { x: 8, y: 20 },
+      { x: 9, y: 66 },
+      { x: 10, y: 10 },
       { x: 11, y: 52 },
       { x: 12, y: 67 },
     ],

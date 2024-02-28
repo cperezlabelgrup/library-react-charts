@@ -1,6 +1,6 @@
 {
   "name": "linechart-test",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "this is a test for a linechart component",
   "main": "dist/cjs/index.js",
   "files": [

@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import LineChart, { LineChartProps } from "./LineChart";
+import LineChart from "./LineChart";
 import React from "react";
 import { LABELS, LINE_SETS } from "../constants/moockData";
+import { LineChartProps } from "./types";
 
 const meta: Meta<typeof LineChart> = {
   title: "Charts/LineChart",
@@ -12,31 +13,15 @@ type Story = StoryObj<typeof LineChart>;
 export const Default: Story = (args: LineChartProps) => (
   <div
     style={{
-      width: "100%",
-      height: "",
+      width: "60%",
+      height: "350px",
       margin: "0 auto",
-      padding: "20px",
+      backgroundColor: "",
       marginTop: 50,
-      backgroundColor: "grey",
       fontFamily: "Arial, sans-serif",
-      display: "flex",
-      justifyContent: "center",
-      flexWrap: "wrap",
-      gap: "50px",
     }}
   >
-    <div style={{
-      width: '600px',
-      height: '250px'
-    }}>
     <LineChart {...args} />
-    </div>
-    <div>
-    <LineChart {...args} />
-    </div>
-    <div>
-    <LineChart {...args} />
-    </div>
   </div>
 );
 Default.args = {
@@ -49,4 +34,18 @@ Default.args = {
     stroke: 1,
     count: 5,
   },
+  customToolTip: (data) => (
+    <div
+      style={{
+        backgroundColor: "#424242",
+        color: "white",
+        padding: "4px",
+        borderRadius: "5px",
+        fontWeight: "bold",
+        fontSize: "0.8rem",
+      }}
+    >
+      <span>custom tooltip</span>
+    </div>
+  ),
 };
