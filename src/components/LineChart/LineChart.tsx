@@ -48,6 +48,7 @@ const LineChart = ({
     handleMouseLeavePoint,
   } = useLineChart(lineSets, lineToShowPointInfo, precision, refContainer);
   const [showTooltip, setShowTooltip] = React.useState(false);
+  console.log("dimensiones", dimensiones);
   return (
     <div
       ref={refContainer}

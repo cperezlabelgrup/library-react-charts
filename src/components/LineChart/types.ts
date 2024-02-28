@@ -8,7 +8,7 @@ export interface DataPoint {
 
 export interface LineSet {
   data: DataPoint[];
-  strokeColor: string;
+  strokeColor?: string;
   label?: string;
   dashedParamater?: number;
   backgroundColorLine?: string;

@@ -37,8 +37,6 @@ export const LINE_SETS: LineSet[] = [
       { x: 11, y: 52 },
       { x: 12, y: 67 },
     ],
-    strokeColor: "rgba(175, 22, 133, 1)",
-    label: "2023",
     backgroundColorLine: "rgba(175, 22, 133, 0.05)",
     dashedParamater: 11,
   },
@@ -58,3 +56,24 @@ export const LABELS = [
   "Nov",
   "Dic",
 ];
+
+const strokeColor = (data: number) => {
+  console.log(data);
+  if (data <= 4000) {
+    return "rgba(175, 22, 133, 1)";
+  } else if (data <= 8000) {
+    return "rgba(175, 22, 133, 0.4)";
+  } else {
+    return "rgba(175, 22, 133, 0.2)";
+  }
+};
+
+export const BAR_SETS = [
+  {
+    name: "Net Profit",
+    data: [3900, 7800, 10000],
+    strokeColor: strokeColor,
+  },
+];
+
+export const BAR_LABELS = ["C: 24% Dto.", "B: 19% Dto.", "A: 12% Dto."];

@@ -33,7 +33,7 @@ const LinePaths = ({
       <path
         fill="none"
         role="line"
-        stroke={lineSets[index].strokeColor}
+        stroke={lineSets[index].strokeColor || "grey"}
         strokeWidth={stroke}
         d={generatePath(
           points,
@@ -44,7 +44,7 @@ const LinePaths = ({
         d={
           generatePathDash(points, lineSets[index].dashedParamater || 0).dashedPath
         }
-        stroke={lineSets[index].strokeColor}
+        stroke={lineSets[index].strokeColor || "grey"}
         strokeWidth={stroke}
         fill="none"
         stroke-dasharray="5,5" // Esto crea el efecto de línea punteada

@@ -24,7 +24,6 @@ export const Default: Story = (args: LineChartProps) => (
     }}
   >
     <LineChart {...args} />
-    <LineChart {...args} />
   </div>
 );
 Default.args = {

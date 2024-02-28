@@ -22,14 +22,14 @@ const CirclePoint = ({ hoverPoint, targetPoint, lineToShowPointInfo, lineSets }:
           className="hoverCircle"
           cy={hoverPoint.y}
           r={5} // Tamaño del círculo de hover
-          fill={lineSets[lineToShowPointInfo].strokeColor} // Color correspondiente a la línea
+          fill={lineSets[lineToShowPointInfo].strokeColor || "grey"} // Color correspondiente a la línea
         />
         <circle
           cx={hoverPoint.x}
           cy={hoverPoint.y}
           r={10} // Radio mayor para la aureola
           fill="none"
-          stroke={lineSets[lineToShowPointInfo].strokeColor} // Color correspondiente a la línea
+          stroke={lineSets[lineToShowPointInfo].strokeColor || "grey"} // Color correspondiente a la línea
           strokeOpacity={0.3} // Opacidad más baja para la aureola
           strokeWidth={3} // Grosor más ancho para crear el efecto de aureola
           style={{
@@ -46,7 +46,7 @@ const CirclePoint = ({ hoverPoint, targetPoint, lineToShowPointInfo, lineSets }:
           cy={hoverPoint.y}
           r={4.5} // Radio menor para el círculo principal
           fill="white"
-          stroke={lineSets[lineToShowPointInfo].strokeColor} // Color correspondiente a la línea
+          stroke={lineSets[lineToShowPointInfo].strokeColor || "grey"} // Color correspondiente a la línea
           strokeWidth={3.5} // Grosor estándar para el círculo principal
           style={{
             opacity:
