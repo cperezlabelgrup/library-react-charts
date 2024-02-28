@@ -61,13 +61,16 @@ const LineChart = ({
       style={{
         backgroundColor: "",
         width: width,
+        padding: "20px",
         maxWidth: "100%",
       }}
     >
       <svg
         id="line-chart-component"
         viewBox={` 0 0 ${dimensiones.width} ${dimensiones.height}`}
-
+        style={{
+          padding: "20px"
+        }}
         overflow={"visible"}
         onMouseMove={handleMouseMovePoint}
         onMouseLeave={handleMouseLeavePoint}
@@ -109,7 +112,7 @@ const LineChart = ({
           />
         )}
         {/* Renderizar Tooltip cuando el punto objetivo es visible */}
-        {targetPoint.visible &&  (
+        {targetPoint.visible && showTooltip &&  (
           <Tooltip
             limitSvg={dimensiones}
             customToolTip={customToolTip}

@@ -20,7 +20,7 @@ export const Default: Story = (args: LineChartProps) => (
       fontFamily: "Arial, sans-serif",
       display: "flex",
       flexWrap: "wrap",
-      gap: "50px",
+      gap: "20px",
     }}
   >
     <LineChart {...args} />
@@ -38,18 +38,4 @@ Default.args = {
     stroke: 1,
     count: 5,
   },
-  // customToolTip: (data) => (
-  //   <div
-  //     style={{
-  //       backgroundColor: "#424242",
-  //       color: "white",
-  //       padding: "4px",
-  //       borderRadius: "5px",
-  //       fontWeight: "bold",
-  //       fontSize: "0.8rem",
-  //     }}
-  //   >
-  //     <span>custom tooltip</span>
-  //   </div>
-  // ),
 };
