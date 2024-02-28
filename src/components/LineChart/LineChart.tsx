@@ -46,10 +46,18 @@ const LineChart = ({
     handleMouseMovePoint,
     handleMouseLeavePoint,
   } = useLineChart(lineSets, lineToShowPointInfo, precision, refContainer);
+  const [showTooltip, setShowTooltip] = React.useState(false);
  
   return (
     <div
       ref={refContainer}
+      onMouseLeave={() => {
+        setShowTooltip(false);
+      }}
+      onMouseEnter={() => {
+        setShowTooltip(true);
+      }
+      }
       style={{
         width: "100%",
         height: "100%",
@@ -96,7 +104,7 @@ const LineChart = ({
             generateBackgroundPath={generateBackgroundPath}
           />
         ))}
-        {hoverPoint.visible && (
+        {hoverPoint.visible && showTooltip && (
           <CirclePoint
             hoverPoint={hoverPoint}
             targetPoint={targetPoint}
