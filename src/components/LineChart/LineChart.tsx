@@ -7,7 +7,6 @@ import LabelsY from "./components/LabelsY/LabelsY";
 import LabelsXAxis from "./components/LabelsX";
 import { LineChartProps } from "./types";
 import HorizontalGuides from "./components/HorizontalGuides";
-import './styles.css';
 const STROKE = 2.8;
 
 /**
@@ -54,6 +53,8 @@ const LineChart = ({
       style={{
         width: "100%",
         height: "100%",
+        backgroundColor: "",
+        padding: "10px",
       }}
     >
       <svg
@@ -62,6 +63,10 @@ const LineChart = ({
         overflow={"visible"}
         onMouseMove={handleMouseMovePoint}
         onMouseLeave={handleMouseLeavePoint}
+        style={{
+          backgroundColor: "",
+          padding: "30px",
+        }}
       >
         <LabelsXAxis FONT_SIZE={FONT_SIZE} padding={padding} dimensiones={dimensiones} labels={xAxisLabels} />
         <LabelsY 

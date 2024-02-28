@@ -34,18 +34,18 @@ Default.args = {
     stroke: 1,
     count: 5,
   },
-  customToolTip: (data) => (
-    <div
-      style={{
-        backgroundColor: "#424242",
-        color: "white",
-        padding: "4px",
-        borderRadius: "5px",
-        fontWeight: "bold",
-        fontSize: "0.8rem",
-      }}
-    >
-      <span>custom tooltip</span>
-    </div>
-  ),
+  // customToolTip: (data) => (
+  //   <div
+  //     style={{
+  //       backgroundColor: "#424242",
+  //       color: "white",
+  //       padding: "4px",
+  //       borderRadius: "5px",
+  //       fontWeight: "bold",
+  //       fontSize: "0.8rem",
+  //     }}
+  //   >
+  //     <span>custom tooltip</span>
+  //   </div>
+  // ),
 };

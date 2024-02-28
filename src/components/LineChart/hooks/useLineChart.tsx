@@ -166,8 +166,8 @@ const useLineChart = (lineSets: LineSet[], lineToShowPointInfo: number, precisio
       }
 
       // Realiza un pequeño paso hacia el objetivo
-      currentX += dx * 0.3;
-      currentY += dy * 0.3;
+      currentX += dx * 0.1;
+      currentY += dy * 0.1;
 
       setHoverPoint((prev) => ({
         ...prev,
