@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Tooltip from "./components/Tooltip";
 import CirclePoint from "./components/CirclePoint";
 import LinePaths from "./components/LinePaths";
@@ -26,6 +26,7 @@ const LineChart = ({
   },
   precision = 0,
   width,
+  height,
   xAxisLabels = [],
   lineToShowPointInfo = 0,
   customToolTip,
@@ -46,9 +47,17 @@ const LineChart = ({
     generateBackgroundPath,
     handleMouseMovePoint,
     handleMouseLeavePoint,
+    setDimensiones,
   } = useLineChart(lineSets, lineToShowPointInfo, precision, refContainer);
   const [showTooltip, setShowTooltip] = React.useState(false);
-  console.log("dimensiones", dimensiones);
+  useEffect(() => {
+    if (refContainer.current) {
+      setDimensiones({
+        width: width || 600,
+        height: height || 200,
+      });
+    }
+  }, [refContainer]);
   return (
     <div
       ref={refContainer}
@@ -60,17 +69,18 @@ const LineChart = ({
       }
       }
       style={{
-        backgroundColor: "",
         width: width,
+        height: height,
         padding: "20px",
         maxWidth: "100%",
+        maxHeight: "100%",
       }}
     >
       <svg
         id="line-chart-component"
-        viewBox={` 0 0 ${dimensiones.width} ${dimensiones.height}`}
+        viewBox={` 0 0 ${width || dimensiones.width} ${height || dimensiones.height}`}
         style={{
-          padding: "20px"
+          padding: "20px",
         }}
         overflow={"visible"}
         onMouseMove={handleMouseMovePoint}

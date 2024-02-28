@@ -29,7 +29,6 @@ export const Default: Story = (args: LineChartProps) => (
 Default.args = {
   lineSets: LINE_SETS,
   xAxisLabels: LABELS,
-  width: 600,
   lineToShowPointInfo: 1,
   horizontalGuides: {
     dashed: true,
