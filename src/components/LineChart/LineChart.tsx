@@ -49,7 +49,7 @@ const LineChart = ({
     handleMouseLeavePoint,
     setDimensiones,
   } = useLineChart(lineSets, lineToShowPointInfo, precision, refContainer);
-  const [showTooltip, setShowTooltip] = React.useState(false);
+
   useEffect(() => {
     if (refContainer.current) {
       setDimensiones({
@@ -61,17 +61,9 @@ const LineChart = ({
   return (
     <div
       ref={refContainer}
-      onMouseLeave={() => {
-        setShowTooltip(false);
-      }}
-      onMouseEnter={() => {
-        setShowTooltip(true);
-      }
-      }
       style={{
         width: width,
         height: height,
-        padding: "20px",
         maxWidth: "100%",
         maxHeight: "100%",
       }}
@@ -79,9 +71,8 @@ const LineChart = ({
       <svg
         id="line-chart-component"
         viewBox={` 0 0 ${width || dimensiones.width} ${height || dimensiones.height}`}
-        style={{
-          padding: "20px",
-        }}
+       width={width || dimensiones.width}
+        height={height || dimensiones.height}
         overflow={"visible"}
         onMouseMove={handleMouseMovePoint}
         onMouseLeave={handleMouseLeavePoint}
@@ -114,7 +105,7 @@ const LineChart = ({
             generateBackgroundPath={generateBackgroundPath}
           />
         ))}
-        {hoverPoint.visible && showTooltip && (
+        {hoverPoint.visible &&  (
           <CirclePoint
             hoverPoint={hoverPoint}
             targetPoint={targetPoint}
@@ -123,7 +114,7 @@ const LineChart = ({
           />
         )}
         {/* Renderizar Tooltip cuando el punto objetivo es visible */}
-        {targetPoint.visible && showTooltip &&  (
+        {targetPoint.visible && (
           <Tooltip
             limitSvg={dimensiones}
             customToolTip={customToolTip}
