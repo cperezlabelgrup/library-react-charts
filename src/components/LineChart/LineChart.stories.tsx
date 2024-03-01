@@ -37,8 +37,6 @@ export const Default: Story = (args: LineChartProps) => (
 );
 Default.args = {
   lineSets: LINE_SETS,
-  showPoints: false,
-  showTooltip: true,
   xAxisLabels: LABELS,
   lineToShowPointInfo: 1,
   horizontalGuides: {

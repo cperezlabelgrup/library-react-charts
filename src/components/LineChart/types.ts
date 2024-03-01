@@ -19,6 +19,7 @@ export interface LineChartProps {
   height?: number;
   width?: number;
   lineToShowPointInfo?: number;
+  hideXlabels?: boolean;
   showPoints?: boolean;
   horizontalGuides?: {
     count?: number;

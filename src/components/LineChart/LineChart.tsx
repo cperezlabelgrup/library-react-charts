@@ -29,6 +29,7 @@ const LineChart = ({
   fontSize,
   height,
   xAxisLabels = [],
+  hideXlabels = false,
   lineToShowPointInfo = 0,
   showPoints = true,
   showTooltip = true,
@@ -52,7 +53,7 @@ const LineChart = ({
     handleMouseLeavePoint,
     setDimensiones,
   } = useLineChart(lineSets, lineToShowPointInfo, precision, refContainer);
-  
+
   useEffect(() => {
     if(refContainer.current && !width) {
       const { width, height } = refContainer.current.getBoundingClientRect();
@@ -93,13 +94,13 @@ const LineChart = ({
         onMouseMove={handleMouseMovePoint}
         onMouseLeave={handleMouseLeavePoint}
       >
-        <LabelsXAxis
+        {!hideXlabels && <LabelsXAxis
           FONT_SIZE={FONT_SIZE}
           fontSize={fontSize}
           padding={padding}
           dimensiones={dimensiones}
           labels={xAxisLabels}
-        />
+        />}
         <LabelsY
           FONT_SIZE={FONT_SIZE}
           fontSize={fontSize}
