@@ -7,7 +7,7 @@ import LabelsY from "./components/LabelsY/LabelsY";
 import LabelsXAxis from "./components/LabelsX";
 import { LineChartProps } from "./types";
 import HorizontalGuides from "./components/HorizontalGuides";
-const STROKE = 2.8;
+const STROKE = 1.8;
 
 /**
  * LineChart es un componente React que renderiza un gráfico de líneas interactivo.
@@ -26,9 +26,12 @@ const LineChart = ({
   },
   precision = 0,
   width,
+  fontSize,
   height,
   xAxisLabels = [],
   lineToShowPointInfo = 0,
+  showPoints = true,
+  showTooltip = true,
   customToolTip,
 }: LineChartProps): JSX.Element => {
   const refContainer = React.useRef<HTMLDivElement>(null);
@@ -49,15 +52,28 @@ const LineChart = ({
     handleMouseLeavePoint,
     setDimensiones,
   } = useLineChart(lineSets, lineToShowPointInfo, precision, refContainer);
-
+  
   useEffect(() => {
-    if (refContainer.current) {
+    if(refContainer.current && !width) {
+      const { width, height } = refContainer.current.getBoundingClientRect();
       setDimensiones({
-        width: width || 600,
+        width: width,
         height: height || 200,
       });
     }
-  }, [refContainer]);
+  }
+  , [refContainer]);
+
+  useEffect(() => {
+    if(width) {
+      setDimensiones({
+        width: width,
+        height: height || 200,
+      });
+    }
+  } , [width, height])
+
+
   return (
     <div
       ref={refContainer}
@@ -70,21 +86,29 @@ const LineChart = ({
     >
       <svg
         id="line-chart-component"
-        viewBox={` 0 0 ${width || dimensiones.width} ${height || dimensiones.height}`}
-       width={width || dimensiones.width}
-        height={height || dimensiones.height}
+        viewBox={` 0 0 ${width || dimensiones.width} ${
+          height || dimensiones.height
+        }`}
         overflow={"visible"}
         onMouseMove={handleMouseMovePoint}
         onMouseLeave={handleMouseLeavePoint}
       >
-        <LabelsXAxis FONT_SIZE={FONT_SIZE} padding={padding} dimensiones={dimensiones} labels={xAxisLabels} />
-        <LabelsY 
-          FONT_SIZE={FONT_SIZE} 
-          padding={padding} 
-          chartHeight={chartHeight} 
-          horizontalGuides={horizontalGuides} 
-          minY={minY} 
-          maxY={maxY} />
+        <LabelsXAxis
+          FONT_SIZE={FONT_SIZE}
+          fontSize={fontSize}
+          padding={padding}
+          dimensiones={dimensiones}
+          labels={xAxisLabels}
+        />
+        <LabelsY
+          FONT_SIZE={FONT_SIZE}
+          fontSize={fontSize}
+          padding={padding}
+          chartHeight={chartHeight}
+          horizontalGuides={horizontalGuides}
+          minY={minY}
+          maxY={maxY}
+        />
         <HorizontalGuides
           padding={padding}
           dimensiones={dimensiones}
@@ -105,7 +129,7 @@ const LineChart = ({
             generateBackgroundPath={generateBackgroundPath}
           />
         ))}
-        {hoverPoint.visible &&  (
+        {hoverPoint.visible && showPoints && (
           <CirclePoint
             hoverPoint={hoverPoint}
             targetPoint={targetPoint}
@@ -114,7 +138,7 @@ const LineChart = ({
           />
         )}
         {/* Renderizar Tooltip cuando el punto objetivo es visible */}
-        {targetPoint.visible && (
+        {targetPoint.visible && showTooltip && (
           <Tooltip
             limitSvg={dimensiones}
             customToolTip={customToolTip}

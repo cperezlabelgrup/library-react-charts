@@ -69,22 +69,21 @@ const ToolTip = ({targetPoint,customToolTip, lineSets, lineToShowPointInfo, xAxi
             }}
           >
               <div style={{
-                backgroundColor: '#424242',
-                color: 'white',
-                fontSize: '0.8rem',
+                backgroundColor: '#ffffff',
+                fontSize: '10px',
                 transition: 'opacity 0.3s ease, transform 0.3s ease',
                 display: 'flex',
                 zIndex: 100,
                 flexDirection: 'column',
                 boxShadow: '0 0 5px 0 rgba(0,0,0,0.2)',
-                borderRadius: '5px',
+                borderRadius: '3px',
                 overflow: 'hidden',
                 fontWeight: 'bold',
               }}
               >
                 <span
                  style={{
-                 backgroundColor: '#0c0c0c',
+                 backgroundColor: '#cacaca',
                  display: 'flex',
                  gap: '5px',
                  paddingBlock: '5px',

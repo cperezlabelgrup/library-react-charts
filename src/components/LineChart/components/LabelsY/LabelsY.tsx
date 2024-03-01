@@ -3,6 +3,7 @@ import React from "react";
 
 interface LabelsYProps {
     FONT_SIZE: number;
+    fontSize?: number;
     padding: number;
     chartHeight: number;
     horizontalGuides: {
@@ -16,7 +17,7 @@ interface LabelsYProps {
     maxY: number;
   }
   
-const LabelsY = ({FONT_SIZE, padding, chartHeight, horizontalGuides, minY, maxY}: LabelsYProps) => {
+const LabelsY = ({FONT_SIZE,fontSize, padding, chartHeight, horizontalGuides, minY, maxY}: LabelsYProps) => {
     const x = FONT_SIZE * 0;
     const countGuides = horizontalGuides?.count || 10;
     let horizontalGuidesMax = countGuides;
@@ -45,7 +46,7 @@ const LabelsY = ({FONT_SIZE, padding, chartHeight, horizontalGuides, minY, maxY}
         y={point.y}
         style={{
           fill: "rgba(177, 177, 177, 1)",
-          fontSize: "0.8rem",
+          fontSize: fontSize || "10px",
           fontFamily: "Roboto",
         }}
       >

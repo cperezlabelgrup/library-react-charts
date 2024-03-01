@@ -14,8 +14,8 @@ export const Default: Story = (args: LineChartProps) => (
   <div
     style={{
       margin: "0 auto",
-      width: "80%",
-      height: "auto",
+      width: "90%",
+      background: "",
       marginTop: 50,
       fontFamily: "Arial, sans-serif",
       display: "flex",
@@ -23,11 +23,22 @@ export const Default: Story = (args: LineChartProps) => (
       gap: "20px",
     }}
   >
-    <LineChart {...args} />
+    <div
+     style={{
+      width: "90%",
+      background: "#a2a2a2c1",
+     }}
+    className="">
+    <LineChart
+      {...args}
+     />
+     </div>
   </div>
 );
 Default.args = {
   lineSets: LINE_SETS,
+  showPoints: false,
+  showTooltip: true,
   xAxisLabels: LABELS,
   lineToShowPointInfo: 1,
   horizontalGuides: {

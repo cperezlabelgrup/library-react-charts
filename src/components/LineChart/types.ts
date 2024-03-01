@@ -19,6 +19,7 @@ export interface LineChartProps {
   height?: number;
   width?: number;
   lineToShowPointInfo?: number;
+  showPoints?: boolean;
   horizontalGuides?: {
     count?: number;
     color?: string;
@@ -30,4 +31,5 @@ export interface LineChartProps {
   xAxisLabels?: string[];
   customToolTip?: (data: DataPoint) => JSX.Element;
   fontSize?: number;
+  showTooltip?: boolean;
 }

@@ -47,7 +47,7 @@ const LinePaths = ({
         stroke={lineSets[index].strokeColor || "grey"}
         strokeWidth={stroke}
         fill="none"
-        stroke-dasharray="5,5" // Esto crea el efecto de línea punteada
+        strokeDasharray="5,5" // Esto crea el efecto de línea punteada
       />
       <path
         key={index}
