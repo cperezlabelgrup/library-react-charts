@@ -26,7 +26,7 @@ export const Default: Story = (args: LineChartProps) => (
     <div
      style={{
       width: "90%",
-      background: "#a2a2a2c1",
+      background: "#ffffffc1",
      }}
     className="">
     <LineChart
@@ -38,7 +38,7 @@ export const Default: Story = (args: LineChartProps) => (
 Default.args = {
   lineSets: LINE_SETS,
   xAxisLabels: LABELS,
-  lineToShowPointInfo: 1,
+  lineToShowPointInfo: 0,
   horizontalGuides: {
     dashed: true,
     color: "#E0E0E0",

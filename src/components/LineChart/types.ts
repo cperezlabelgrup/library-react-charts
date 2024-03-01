@@ -29,6 +29,7 @@ export interface LineChartProps {
   };
   verticalGuides?: boolean;
   precision?: number;
+  stroke?: number;
   xAxisLabels?: string[];
   customToolTip?: (data: DataPoint) => JSX.Element;
   fontSize?: number;

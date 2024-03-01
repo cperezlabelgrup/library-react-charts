@@ -27,6 +27,9 @@ const LinePaths = ({
   stroke,
   generateBackgroundPath,
 }: LinePathsProps) => {
+  // si estamos manejando muchsiiimos datos, el stroke debe ser 0.6
+  const isBigData = points.length >= 800;
+
  
   return (
     <React.Fragment key={index}>
@@ -34,7 +37,7 @@ const LinePaths = ({
         fill="none"
         role="line"
         stroke={lineSets[index].strokeColor || "grey"}
-        strokeWidth={stroke}
+        strokeWidth={isBigData ? 1 : stroke}
         d={generatePath(
           points,
           lineSets[index].dashedParamater - 1 || 0

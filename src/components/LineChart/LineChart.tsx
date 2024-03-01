@@ -7,7 +7,7 @@ import LabelsY from "./components/LabelsY/LabelsY";
 import LabelsXAxis from "./components/LabelsX";
 import { LineChartProps } from "./types";
 import HorizontalGuides from "./components/HorizontalGuides";
-const STROKE = 1.8;
+// const STROKE = 0.6;
 
 /**
  * LineChart es un componente React que renderiza un gráfico de líneas interactivo.
@@ -26,6 +26,7 @@ const LineChart = ({
   },
   precision = 0,
   width,
+  stroke = 2.6,
   fontSize,
   height,
   xAxisLabels = [],
@@ -126,7 +127,7 @@ const LineChart = ({
             index={index}
             generatePathDash={generatePathDash}
             generatePath={generatePath}
-            stroke={STROKE}
+            stroke={stroke}
             generateBackgroundPath={generateBackgroundPath}
           />
         ))}
