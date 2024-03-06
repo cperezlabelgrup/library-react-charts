@@ -106,7 +106,6 @@ export const LABELS = [
 ];
 
 const strokeColor = (data: number) => {
-  console.log(data);
   if (data <= 4000) {
     return "rgba(175, 22, 133, 1)";
   } else if (data <= 8000) {

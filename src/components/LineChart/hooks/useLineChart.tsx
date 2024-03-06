@@ -111,8 +111,7 @@ const useLineChart = (lineSets: LineSet[], lineToShowPointInfo: number, precisio
         "The lineToShowPointInfo prop must be a valid index of the lineSets array."
       );
     }
-    console.log("pointsSets", pointsSets);
-
+    
     pointsSets[lineToShowPointInfo]?.forEach((point) => {
       const distance = Math.abs(point.x - mouseX);
       if (distance < minDistance) {
