@@ -38,7 +38,7 @@ export const Default: Story = (args: LineChartProps) => (
 Default.args = {
   lineSets: LINE_SETS,
   xAxisLabels: LABELS,
-  lineToShowPointInfo: 0,
+  lineToShowPointInfo: 1,
   horizontalGuides: {
     dashed: true,
     color: "#E0E0E0",

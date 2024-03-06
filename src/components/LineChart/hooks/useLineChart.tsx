@@ -104,6 +104,14 @@ const useLineChart = (lineSets: LineSet[], lineToShowPointInfo: number, precisio
     // Encuentra el punto más cercano al mouseX
     let closestPoint = null as null | { x: number; y: number };
     let minDistance = Infinity;
+    // si lineToShowPointInfo no concuerda con algun index de lineSets, no se muestra el punto
+    if (lineToShowPointInfo < 0 || lineToShowPointInfo >= pointsSets.length) {
+      // retornar warning en la consola en inglés
+      return console.warn(
+        "The lineToShowPointInfo prop must be a valid index of the lineSets array."
+      );
+    }
+    console.log("pointsSets", pointsSets);
 
     pointsSets[lineToShowPointInfo]?.forEach((point) => {
       const distance = Math.abs(point.x - mouseX);
