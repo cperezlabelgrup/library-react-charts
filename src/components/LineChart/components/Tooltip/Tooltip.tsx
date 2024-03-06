@@ -42,6 +42,7 @@ const ToolTip = ({targetPoint,customToolTip, lineSets, lineToShowPointInfo, xAxi
     const value = lineSets[lineToShowPointInfo].data[targetPoint.index];
     const x = xAxisLabels[targetPoint.index];
     const label = lineSets[lineToShowPointInfo].label || `Line ${lineToShowPointInfo + 1}`;
+    const xLabel = xAxisLabels[targetPoint.index] || `X: ${targetPoint.index}`;
 
     return (
       <foreignObject
@@ -55,7 +56,7 @@ const ToolTip = ({targetPoint,customToolTip, lineSets, lineToShowPointInfo, xAxi
           transition: "opacity 0.3s ease, transform 0.3s ease",
         }}
       >
-        {customToolTip({ value, x, label })}
+        {customToolTip({ value, x, label, xLabel })}
       </foreignObject>
     )
   }
