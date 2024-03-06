@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { LineSet } from "../../types";
+import { CustomToolTipData, LineSet } from "../../types";
 
 
 interface ToolTipProps {
@@ -21,7 +21,7 @@ interface ToolTipProps {
     width: number;
     height: number;
   };
-  customToolTip?: (data: any) => JSX.Element;
+  customToolTip?: (data: CustomToolTipData) => JSX.Element;
 }
 
 
@@ -40,7 +40,6 @@ const ToolTip = ({targetPoint,customToolTip, lineSets, lineToShowPointInfo, xAxi
 
   if(customToolTip) {
     const value = lineSets[lineToShowPointInfo].data[targetPoint.index];
-    const x = xAxisLabels[targetPoint.index];
     const label = lineSets[lineToShowPointInfo].label || `Line ${lineToShowPointInfo + 1}`;
     const xLabel = xAxisLabels[targetPoint.index] || `X: ${targetPoint.index}`;
 
@@ -56,7 +55,7 @@ const ToolTip = ({targetPoint,customToolTip, lineSets, lineToShowPointInfo, xAxi
           transition: "opacity 0.3s ease, transform 0.3s ease",
         }}
       >
-        {customToolTip({ value, x, label, xLabel })}
+        {customToolTip({ value, label, xLabel })}
       </foreignObject>
     )
   }

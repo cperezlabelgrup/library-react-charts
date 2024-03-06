@@ -14,6 +14,14 @@ export interface LineSet {
   dashedParamater?: number;
   backgroundColorLine?: string;
 }
+export interface CustomToolTipData {
+  value: {
+    x: number;
+    y: number;
+  };
+  label: string;
+  xLabel: string;
+}
 
 export interface LineChartProps {
   lineSets: LineSet[];
@@ -32,7 +40,7 @@ export interface LineChartProps {
   precision?: number;
   stroke?: number;
   xAxisLabels?: string[];
-  customToolTip?: (data: DataPoint) => JSX.Element;
+  customToolTip?: (data: CustomToolTipData) => JSX.Element;
   fontSize?: number;
   showTooltip?: boolean;
 }
