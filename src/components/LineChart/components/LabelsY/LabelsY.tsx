@@ -17,7 +17,7 @@ interface LabelsYProps {
     maxY: number;
   }
   
-const LabelsY = ({FONT_SIZE,fontSize, padding, chartHeight, horizontalGuides, minY, maxY}: LabelsYProps) => {
+const LabelsY = React.memo(({FONT_SIZE,fontSize, padding, chartHeight, horizontalGuides, minY, maxY}: LabelsYProps) => {
     const x = FONT_SIZE * 0;
     const countGuides = horizontalGuides?.count || 10;
     let horizontalGuidesMax = countGuides;
@@ -53,6 +53,6 @@ const LabelsY = ({FONT_SIZE,fontSize, padding, chartHeight, horizontalGuides, mi
         {point.label}
       </text>
     ));
-  };
+  });
 
   export default LabelsY;

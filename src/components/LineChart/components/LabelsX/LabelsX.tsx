@@ -8,7 +8,7 @@ interface LabelsXProps {
   fontSize?: number;
 }
 
-const LabelsXAxis = ({ FONT_SIZE, padding, dimensiones, labels, fontSize }: LabelsXProps) => {
+const LabelsXAxis = React.memo(({ FONT_SIZE, padding, dimensiones, labels, fontSize }: LabelsXProps) => {
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   useEffect(() => {
     const handleResize = () => {
@@ -22,7 +22,7 @@ const LabelsXAxis = ({ FONT_SIZE, padding, dimensiones, labels, fontSize }: Labe
   }, []);
 
   const chartWidth = dimensiones.width - padding * 2;
-
+  
   return (
     <g>
       {labels.map((label, index) => {
@@ -48,6 +48,6 @@ const LabelsXAxis = ({ FONT_SIZE, padding, dimensiones, labels, fontSize }: Labe
       })}
     </g>
   );
-};
+});
 
 export default LabelsXAxis;

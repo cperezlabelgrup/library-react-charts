@@ -15,20 +15,26 @@ const useLineChart = (lineSets: LineSet[], lineToShowPointInfo: number, precisio
     Math.max(
       ...lineSets.flatMap((lineSet) => lineSet.data.map((point) => point.x))
     );
-  const getMinY = () => {
-    // Obtener todos los valores de Y de todos los conjuntos de datos
-    const allYValues = lineSets.flatMap((lineSet) =>
-      lineSet.data.map((point) => point.y)
-    );
-    // Calcular el mínimo real de los datos
-    const minY = Math.min(...allYValues);
-
-    return minY;
-  };
-  const getMaxY = () =>
-    Math.max(
-      ...lineSets.flatMap((lineSet) => lineSet.data.map((point) => point.y))
-    );
+    const getMinY = () => {
+      // Obtener todos los valores de Y de todos los conjuntos de datos
+      const allYValues = lineSets.flatMap((lineSet) =>
+        lineSet.data.map((point) => point.y)
+      );
+      // Calcular el mínimo real de los datos
+      const actualMinY = Math.min(...allYValues);
+      // Asegurarse de incluir 0 si el mínimo actual es mayor que 0
+      return actualMinY > 0 ? 0 : actualMinY;
+    };
+    const getMaxY = () => {
+      // Obtener todos los valores de Y de todos los conjuntos de datos
+      const allYValues = lineSets.flatMap((lineSet) =>
+        lineSet.data.map((point) => point.y)
+      );
+      // Calcular el máximo real de los datos
+      const actualMaxY = Math.max(...allYValues);
+      // Asegurarse de incluir 0 si el máximo actual es menor que 0
+      return actualMaxY < 0 ? 0 : actualMaxY;
+    };
 
   const maxX = getMaxX();
   const minY = getMinY();
@@ -125,7 +131,7 @@ const useLineChart = (lineSets: LineSet[], lineToShowPointInfo: number, precisio
     setHoverPoint({ ...hoverPoint, visible: false });
     setTargetPoint({ ...targetPoint, visible: false });
   };
-
+  
   const animateToPoint = (targetX: number, targetY: number) => {
     // Evita iniciar la animación si ya estás en el punto objetivo
     if (hoverPoint.x === targetX && hoverPoint.y === targetY) return;

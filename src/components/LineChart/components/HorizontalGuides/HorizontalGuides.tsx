@@ -14,17 +14,15 @@ interface HorizontalGuidesProps {
   }
   
 
-const HorizontalGuides = ({ padding, dimensiones, chartHeight, horizontalGuides }: HorizontalGuidesProps) => {
+  const HorizontalGuides = React.memo(({ padding, dimensiones, chartHeight, horizontalGuides }: HorizontalGuidesProps) => {
     const startX = padding;
     const endX = dimensiones.width - padding;
     const countGuides = horizontalGuides?.count || 10;
-    let horizontalGuidesMax = countGuides;
-    if (countGuides > 6) {
-      horizontalGuidesMax = 6;
-    }
-    return new Array(horizontalGuidesMax).fill(0).map((_, index) => {
-      const ratio = (index + 1) / horizontalGuidesMax;
-      const yCoordinate = chartHeight - chartHeight * ratio + padding + 2;
+    let horizontalGuidesMax = Math.min(countGuides, 6); // Asegura que el máximo de guías sea 6 o el definido por el usuario si es menor
+    
+    return [...Array(horizontalGuidesMax + 1)].map((_, index) => { // +1 para incluir el borde superior
+      const ratio = index / horizontalGuidesMax; // Ajuste aquí para incluir el borde superior
+      const yCoordinate = chartHeight * (1 - ratio) + padding; // Ajuste en el cálculo de yCoordinate
 
       return (
         <React.Fragment key={index}>
@@ -42,6 +40,6 @@ const HorizontalGuides = ({ padding, dimensiones, chartHeight, horizontalGuides 
         </React.Fragment>
       );
     });
-  };
+});
 
   export default HorizontalGuides;

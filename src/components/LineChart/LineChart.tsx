@@ -32,7 +32,6 @@ const LineChart = ({
   xAxisLabels = [],
   hideXlabels = false,
   lineToShowPointInfo = 0,
-  showPoints = true,
   showTooltip = true,
   customToolTip,
 }: LineChartProps): JSX.Element => {
@@ -54,6 +53,7 @@ const LineChart = ({
     handleMouseLeavePoint,
     setDimensiones,
   } = useLineChart(lineSets, lineToShowPointInfo, precision, refContainer);
+  const [showPoint, setShowPoint] = React.useState(true);
 
   useEffect(() => {
     if(refContainer.current && !width) {
@@ -75,7 +75,6 @@ const LineChart = ({
     }
   } , [width, height])
 
-
   return (
     <div
       ref={refContainer}
@@ -92,8 +91,14 @@ const LineChart = ({
           height || dimensiones.height
         }`}
         overflow={"visible"}
-        onMouseMove={handleMouseMovePoint}
-        onMouseLeave={handleMouseLeavePoint}
+        onMouseMove={(e) =>{
+          handleMouseMovePoint(e);
+          setShowPoint(true);
+        }}
+        onMouseLeave={() => {
+          handleMouseLeavePoint();
+          setShowPoint(false);
+        }}
       >
         {!hideXlabels && <LabelsXAxis
           FONT_SIZE={FONT_SIZE}
@@ -131,7 +136,7 @@ const LineChart = ({
             generateBackgroundPath={generateBackgroundPath}
           />
         ))}
-        {hoverPoint.visible && showPoints && (
+        {hoverPoint.visible && showPoint && (
           <CirclePoint
             hoverPoint={hoverPoint}
             targetPoint={targetPoint}
