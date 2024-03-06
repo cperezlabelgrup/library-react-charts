@@ -39,6 +39,10 @@ const ToolTip = ({targetPoint,customToolTip, lineSets, lineToShowPointInfo, xAxi
   , [hoverPoint, limitSvg.width]);
 
   if(customToolTip) {
+    const value = lineSets[lineToShowPointInfo].data[targetPoint.index];
+    const x = xAxisLabels[targetPoint.index];
+    const label = lineSets[lineToShowPointInfo].label || `Line ${lineToShowPointInfo + 1}`;
+
     return (
       <foreignObject
       x={tooltipPosition.x}
@@ -51,7 +55,7 @@ const ToolTip = ({targetPoint,customToolTip, lineSets, lineToShowPointInfo, xAxi
           transition: "opacity 0.3s ease, transform 0.3s ease",
         }}
       >
-        {customToolTip(targetPoint)}
+        {customToolTip({ value, x, label })}
       </foreignObject>
     )
   }
