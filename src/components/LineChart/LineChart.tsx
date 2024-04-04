@@ -33,6 +33,7 @@ const LineChart = ({
   hideXlabels = false,
   lineToShowPointInfo = 0,
   showTooltip = true,
+  showAllPoints = false,
   customToolTip,
 }: LineChartProps): JSX.Element => {
   const refContainer = React.useRef<HTMLDivElement>(null);
@@ -51,29 +52,30 @@ const LineChart = ({
     generateBackgroundPath,
     handleMouseMovePoint,
     handleMouseLeavePoint,
+    setHoverPoint,
+    setTargetPoint,
     setDimensiones,
   } = useLineChart(lineSets, lineToShowPointInfo, precision, refContainer);
   const [showPoint, setShowPoint] = React.useState(true);
 
   useEffect(() => {
-    if(refContainer.current && !width) {
+    if (refContainer.current && !width) {
       const { width, height } = refContainer.current.getBoundingClientRect();
       setDimensiones({
         width: width,
         height: height || 200,
       });
     }
-  }
-  , [refContainer]);
+  }, [refContainer]);
 
   useEffect(() => {
-    if(width) {
+    if (width) {
       setDimensiones({
         width: width,
         height: height || 200,
       });
     }
-  } , [width, height])
+  }, [width, height]);
 
   return (
     <div
@@ -91,22 +93,26 @@ const LineChart = ({
           height || dimensiones.height
         }`}
         overflow={"visible"}
-        onMouseMove={(e) =>{
+        onMouseMove={(e) => {
+          if (showAllPoints) return;
           handleMouseMovePoint(e);
           setShowPoint(true);
         }}
         onMouseLeave={() => {
+          if (showAllPoints) return;
           handleMouseLeavePoint();
           setShowPoint(false);
         }}
       >
-        {!hideXlabels && <LabelsXAxis
-          FONT_SIZE={FONT_SIZE}
-          fontSize={fontSize}
-          padding={padding}
-          dimensiones={dimensiones}
-          labels={xAxisLabels}
-        />}
+        {!hideXlabels && (
+          <LabelsXAxis
+            FONT_SIZE={FONT_SIZE}
+            fontSize={fontSize}
+            padding={padding}
+            dimensiones={dimensiones}
+            labels={xAxisLabels}
+          />
+        )}
         <LabelsY
           FONT_SIZE={FONT_SIZE}
           fontSize={fontSize}
@@ -136,7 +142,41 @@ const LineChart = ({
             generateBackgroundPath={generateBackgroundPath}
           />
         ))}
-        {hoverPoint.visible && showPoint && (
+        {/* Renderizar todos los puntos */}
+        {showAllPoints &&
+          pointsSets.map((points, lineIndex) => (
+            <g key={lineIndex}>
+              {points.map((point, pointIndex) => (
+                <circle
+                  cursor="pointer"
+                  key={`${lineIndex}-${pointIndex}`}
+                  cx={point.x}
+                  cy={point.y}
+                  r={5}
+                  fill={"#666666"}
+                  onMouseEnter={(e) => {
+                   setHoverPoint({
+                      x: point.x,
+                      y: point.y,
+                      visible: true,
+                      lineIndex,
+                    });
+                    setTargetPoint({
+                      x: point.x,
+                      y: point.y,
+                      visible: true,
+                      index: pointIndex,
+                    });
+                  }}
+                  onMouseLeave={() => {
+                    handleMouseLeavePoint();
+                  }}
+                />
+              ))}
+            </g>
+          ))}
+        {/* Renderizar punto cuando el mouse está sobre el gráfico */}
+        {hoverPoint.visible && showPoint && !showAllPoints && (
           <CirclePoint
             hoverPoint={hoverPoint}
             targetPoint={targetPoint}
@@ -148,6 +188,7 @@ const LineChart = ({
         {targetPoint.visible && showTooltip && (
           <Tooltip
             limitSvg={dimensiones}
+            showAllPoints={showAllPoints}
             customToolTip={customToolTip}
             hoverPoint={hoverPoint}
             targetPoint={targetPoint}

@@ -4,13 +4,17 @@ import { DataPoint, LineSet } from "../types";
 
 const useLineChart = (lineSets: LineSet[], lineToShowPointInfo: number, precision: number = 2, refContainer: React.RefObject<HTMLDivElement>) => {
   const [dimensiones, setDimensiones] = useState({ width: 600, height: 200 });
-  const [hoverPoint, setHoverPoint] = useState({ x: 0, y: 0, visible: false });
+  const [hoverPoint, setHoverPoint] = useState({ x: 0, y: 0, visible: false, lineIndex: 0});
   const [targetPoint, setTargetPoint] = useState({
     x: 0,
     y: 0,
     visible: false,
     index: 0,
   });
+
+  console.log({hoverPoint})
+
+
   const getMaxX = () =>
     Math.max(
       ...lineSets.flatMap((lineSet) => lineSet.data.map((point) => point.x))
@@ -152,7 +156,7 @@ const useLineChart = (lineSets: LineSet[], lineToShowPointInfo: number, precisio
 
       // Termina la animación si la distancia al objetivo es menor a un umbral
       if (Math.abs(dx) < 1 && Math.abs(dy) < 1) {
-        setHoverPoint({ x: targetX, y: targetY, visible: true });
+        setHoverPoint({ x: targetX, y: targetY, visible: true, lineIndex: 0 });
         return;
       }
 

@@ -43,4 +43,5 @@ export interface LineChartProps {
   customToolTip?: (data: CustomToolTipData) => JSX.Element;
   fontSize?: number;
   showTooltip?: boolean;
+  showAllPoints?: boolean;
 }

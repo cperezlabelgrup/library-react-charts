@@ -39,6 +39,7 @@ Default.args = {
   lineSets: LINE_SETS,
   xAxisLabels: LABELS,
   lineToShowPointInfo: 1,
+  showAllPoints: true,
   horizontalGuides: {
     dashed: true,
     color: "#E0E0E0",

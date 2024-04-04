@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { CustomToolTipData, LineSet } from "../../types";
-
 
 interface ToolTipProps {
   targetPoint: {
@@ -13,6 +12,7 @@ interface ToolTipProps {
     x: number;
     y: number;
     visible: boolean;
+    lineIndex: number;
   };
   lineSets: LineSet[];
   lineToShowPointInfo: number;
@@ -22,11 +22,19 @@ interface ToolTipProps {
     height: number;
   };
   customToolTip?: (data: CustomToolTipData) => JSX.Element;
+  showAllPoints?: boolean;
 }
 
-
-
-const ToolTip = ({targetPoint,customToolTip, lineSets, lineToShowPointInfo, xAxisLabels, hoverPoint, limitSvg }: ToolTipProps) => {
+const ToolTip = ({
+  targetPoint,
+  customToolTip,
+  lineSets,
+  lineToShowPointInfo,
+  xAxisLabels,
+  hoverPoint,
+  limitSvg,
+  showAllPoints,
+}: ToolTipProps) => {
   const [tooltipPosition, setTooltipPosition] = React.useState({ x: 0, y: 0 });
   useEffect(() => {
     // si el tooltip se sale del límite del svg, se ajusta su posición
@@ -35,18 +43,18 @@ const ToolTip = ({targetPoint,customToolTip, lineSets, lineToShowPointInfo, xAxi
     } else {
       setTooltipPosition({ x: hoverPoint.x, y: hoverPoint.y + 20 });
     }
-  }
-  , [hoverPoint, limitSvg.width]);
+  }, [hoverPoint, limitSvg.width]);
 
-  if(customToolTip) {
+  if (customToolTip) {
     const value = lineSets[lineToShowPointInfo].data[targetPoint.index];
-    const label = lineSets[lineToShowPointInfo].label || `Line ${lineToShowPointInfo + 1}`;
+    const label =
+      lineSets[hoverPoint.lineIndex].label || `Line ${lineToShowPointInfo + 1}`;
     const xLabel = xAxisLabels[targetPoint.index] || `X: ${targetPoint.index}`;
 
     return (
       <foreignObject
-      x={tooltipPosition.x}
-      y={tooltipPosition.y}
+        x={tooltipPosition.x}
+        y={tooltipPosition.y}
         width="100"
         height="100"
         overflow={"visible"}
@@ -57,62 +65,69 @@ const ToolTip = ({targetPoint,customToolTip, lineSets, lineToShowPointInfo, xAxi
       >
         {customToolTip({ value, label, xLabel })}
       </foreignObject>
-    )
+    );
   }
+  const label = showAllPoints ? lineSets[hoverPoint.lineIndex].label :  lineSets[lineToShowPointInfo].label || `Line ${lineToShowPointInfo + 1}`;
+  const xLabel = xAxisLabels[targetPoint.index] || `X: ${targetPoint.index}`;
+  const xValue = showAllPoints ? lineSets[hoverPoint.lineIndex].data[targetPoint.index].x : lineSets[lineToShowPointInfo].data[targetPoint.index].x;
+  const yValue = showAllPoints ? lineSets[hoverPoint.lineIndex].data[targetPoint.index].y : lineSets[lineToShowPointInfo].data[targetPoint.index].y;
 
-   return (
+  
+  return (
     <foreignObject
-            x={tooltipPosition.x}
-            y={tooltipPosition.y}
-            width="100"
-            height="100"
-            overflow={"visible"}
-            className="tooltip-chart"
-            style={{
-                transition : "opacity 0.3s ease, transform 0.3s ease",
-            }}
-          >
-              <div style={{
-                backgroundColor: '#ffffff',
-                fontSize: '10px',
-                transition: 'opacity 0.3s ease, transform 0.3s ease',
-                display: 'flex',
-                zIndex: 100,
-                flexDirection: 'column',
-                boxShadow: '0 0 5px 0 rgba(0,0,0,0.2)',
-                borderRadius: '3px',
-                overflow: 'hidden',
-                fontWeight: 'bold',
-              }}
-              >
-                <span
-                 style={{
-                 backgroundColor: '#cacaca',
-                 display: 'flex',
-                 gap: '5px',
-                 paddingBlock: '5px',
-                  paddingInline: '5px',
-                 }}
-                >
-                  {lineSets[lineToShowPointInfo].label || `Line ${lineToShowPointInfo + 1}`}
-                  <span>
-                   {xAxisLabels[targetPoint.index] || `X: ${targetPoint.index}`}
-                </span>
-                </span>
-                 <div style={{
-                  padding: '5px',
-                  
-                 }}>
-                <span className="tooltip-text">
-                  x:{lineSets[lineToShowPointInfo].data[targetPoint.index].x}
-                </span>
-                <span>
-                  y:{lineSets[lineToShowPointInfo].data[targetPoint.index].y}
-                </span>
-                </div>
-              </div>
-          </foreignObject>
-   )
-}
+      x={tooltipPosition.x}
+      y={tooltipPosition.y}
+      width="100"
+      height="100"
+      overflow={"visible"}
+      className="tooltip-chart"
+      style={{
+        transition: "opacity 0.3s ease, transform 0.3s ease",
+      }}
+    >
+      <div
+        style={{
+          backgroundColor: "#ffffff",
+          fontSize: "10px",
+          transition: "opacity 0.3s ease, transform 0.3s ease",
+          display: "flex",
+          zIndex: 100,
+          flexDirection: "column",
+          boxShadow: "0 0 5px 0 rgba(0,0,0,0.2)",
+          borderRadius: "3px",
+          overflow: "hidden",
+          fontWeight: "bold",
+        }}
+      >
+        <span
+          style={{
+            backgroundColor: "#cacaca",
+            display: "flex",
+            gap: "5px",
+            paddingBlock: "5px",
+            paddingInline: "5px",
+          }}
+        >
+          {label}
+          <span>
+            {xLabel}
+          </span>
+        </span>
+        <div
+          style={{
+            padding: "5px",
+          }}
+        >
+          <span className="tooltip-text">
+            x:{xValue}
+          </span>
+          <span>
+            y:{yValue}
+          </span>
+        </div>
+      </div>
+    </foreignObject>
+  );
+};
 
 export default ToolTip;
