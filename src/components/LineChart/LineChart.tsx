@@ -25,15 +25,14 @@ const LineChart = ({
     stroke: 1,
   },
   precision = 0,
-  width,
   stroke = 2.6,
   fontSize,
-  height,
   xAxisLabels = [],
   hideXlabels = false,
   lineToShowPointInfo = 0,
   showTooltip = true,
   showAllPoints = false,
+  hideYlabels = false,
   customToolTip,
 }: LineChartProps): JSX.Element => {
   const refContainer = React.useRef<HTMLDivElement>(null);
@@ -112,7 +111,7 @@ const LineChart = ({
             labels={xAxisLabels}
           />
         )}
-        <LabelsY
+        {!hideYlabels && <LabelsY
           FONT_SIZE={FONT_SIZE}
           fontSize={fontSize}
           padding={padding}
@@ -120,7 +119,7 @@ const LineChart = ({
           horizontalGuides={horizontalGuides}
           minY={minY}
           maxY={maxY}
-        />
+        />}
         <HorizontalGuides
           padding={padding}
           dimensiones={dimensiones}

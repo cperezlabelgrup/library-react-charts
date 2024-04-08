@@ -25,10 +25,9 @@ export interface CustomToolTipData {
 
 export interface LineChartProps {
   lineSets: LineSet[];
-  height?: number;
-  width?: number;
   lineToShowPointInfo?: number;
   hideXlabels?: boolean;
+  hideYlabels?: boolean;
   showPoints?: boolean;
   horizontalGuides?: {
     count?: number;
