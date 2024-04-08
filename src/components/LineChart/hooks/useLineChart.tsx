@@ -45,7 +45,7 @@ const useLineChart = (lineSets: LineSet[], lineToShowPointInfo: number, precisio
   );
 
   const digits = parseFloat(maxY.toString()).toFixed(precision).length + 1;
-  const padding = 50
+  const padding = 30
   const chartWidth = dimensiones.width - padding * 2;
   const chartHeight = dimensiones.height - padding * 2;
   const FONT_SIZE = chartWidth / 60;

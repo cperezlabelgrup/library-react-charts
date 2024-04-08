@@ -60,30 +60,31 @@ const LineChart = ({
   // coger el height del contenedor padre
 
   const handleResize = () => {
-    if(refContainer.current) {
-      const height = refContainer.current.parentElement?.clientHeight;
-      const width = refContainer.current.parentElement?.clientWidth;
-      setDimensiones({
-        width: width || 600,
-        height: height || 200,
-      });
+    if (refContainer.current) {
+      const width = refContainer.current.clientWidth; // Usar clientWidth del contenedor padre
+      const height = refContainer.current.clientHeight; // Usar clientHeight del contenedor padre
+      // debemos establecer un height minimo en caso de que el contenedor padre sea muy pequeño
+      if (height < 200) {
+        console.log('height', height)
+      }
+      console.log('width', width)
+      setDimensiones({ width, height });
     }
-  }
+  };
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
-    handleResize();
+    handleResize(); // Llamar a handleResize inicialmente para establecer dimensiones
     return () => window.removeEventListener("resize", handleResize);
-  }
-  , []);
+  }, []);
 
 
   return (
     <div
       ref={refContainer}
       style={{
-        width: dimensiones.width,
-        height: dimensiones.height,
+        width: "100%",
+        height: "100%",
       }}
     >
       <svg

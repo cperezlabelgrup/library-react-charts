@@ -24,11 +24,11 @@ export const Default: Story = (args: LineChartProps) => (
   >
     <div
      style={{
-      width: "100%",
-      height: "400px",
+      width: "600px",
+      height: "230px",
       margin: "0 auto",
       border: "1px solid #E0E0E0",
-      padding: "10px",
+      
      }}
     className="">
     <LineChart

@@ -30,7 +30,7 @@ const LabelsY = React.memo(({FONT_SIZE,fontSize, padding, chartHeight, horizonta
       ...new Array(horizontalGuidesMax).fill(0).map((_, index) => {
         const ratio = (index + 1) / horizontalGuidesMax;
         const yCoordinate = chartHeight - chartHeight * ratio + padding;
-        const y = yCoordinate + FONT_SIZE / 4;
+        const y = yCoordinate + FONT_SIZE / 2;
 
         return {
           label: Math.round(minY + (maxY - minY) * ratio).toLocaleString(),
