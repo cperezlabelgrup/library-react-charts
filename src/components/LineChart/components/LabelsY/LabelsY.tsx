@@ -42,7 +42,7 @@ const LabelsY = React.memo(({FONT_SIZE,fontSize, padding, chartHeight, horizonta
     return labels.map((point, index) => (
       <text
         key={index}
-        x={x - FONT_SIZE * 2}
+        x={x}
         y={point.y}
         style={{
           fill: "rgba(177, 177, 177, 1)",

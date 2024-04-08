@@ -15,7 +15,6 @@ export const Default: Story = (args: LineChartProps) => (
     style={{
       margin: "0 auto",
       width: "90%",
-      background: "",
       marginTop: 50,
       fontFamily: "Arial, sans-serif",
       display: "flex",
@@ -25,8 +24,11 @@ export const Default: Story = (args: LineChartProps) => (
   >
     <div
      style={{
-      width: "90%",
-      background: "#ffffffc1",
+      width: "100%",
+      height: "400px",
+      margin: "0 auto",
+      border: "1px solid #E0E0E0",
+      padding: "10px",
      }}
     className="">
     <LineChart
@@ -39,7 +41,7 @@ Default.args = {
   lineSets: LINE_SETS,
   xAxisLabels: LABELS,
   lineToShowPointInfo: 1,
-  showAllPoints: true,
+  // showAllPoints: true,
   horizontalGuides: {
     dashed: true,
     color: "#E0E0E0",

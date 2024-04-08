@@ -27,8 +27,7 @@ const LabelsXAxis = React.memo(({ FONT_SIZE, padding, dimensiones, labels, fontS
     <g>
       {labels.map((label, index) => {
         const x = (index / (labels.length - 1)) * chartWidth + padding;
-        const yAdjustment = viewportWidth < 600 ? FONT_SIZE * 4 : FONT_SIZE * 3;
-        const y = dimensiones.height - padding + yAdjustment;
+        const y = dimensiones.height - padding + FONT_SIZE * 2;
         return (
           <text
             key={index}

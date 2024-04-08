@@ -58,40 +58,39 @@ const LineChart = ({
   } = useLineChart(lineSets, lineToShowPointInfo, precision, refContainer);
   const [showPoint, setShowPoint] = React.useState(true);
 
-  useEffect(() => {
-    if (refContainer.current && !width) {
-      const { width, height } = refContainer.current.getBoundingClientRect();
+  // coger el height del contenedor padre
+
+  const handleResize = () => {
+    if(refContainer.current) {
+      const height = refContainer.current.parentElement?.clientHeight;
+      const width = refContainer.current.parentElement?.clientWidth;
       setDimensiones({
-        width: width,
+        width: width || 600,
         height: height || 200,
       });
     }
-  }, [refContainer]);
+  }
 
   useEffect(() => {
-    if (width) {
-      setDimensiones({
-        width: width,
-        height: height || 200,
-      });
-    }
-  }, [width, height]);
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }
+  , []);
+
 
   return (
     <div
       ref={refContainer}
       style={{
-        width: width,
-        height: height,
-        maxWidth: "100%",
-        maxHeight: "100%",
+        width: dimensiones.width,
+        height: dimensiones.height,
       }}
     >
       <svg
         id="line-chart-component"
-        viewBox={` 0 0 ${width || dimensiones.width} ${
-          height || dimensiones.height
-        }`}
+        width='100%'
+        height='100%'
         overflow={"visible"}
         onMouseMove={(e) => {
           if (showAllPoints) return;
