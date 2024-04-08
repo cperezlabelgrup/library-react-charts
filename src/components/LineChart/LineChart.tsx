@@ -51,23 +51,23 @@ const LineChart = ({
     generateBackgroundPath,
     handleMouseMovePoint,
     handleMouseLeavePoint,
+    handleTouchMovePoint,
     setHoverPoint,
     setTargetPoint,
     setDimensiones,
   } = useLineChart(lineSets, lineToShowPointInfo, precision, refContainer);
   const [showPoint, setShowPoint] = React.useState(true);
+  const [isMobile, setIsMobile] = React.useState(false);
 
-  // coger el height del contenedor padre
+  useEffect(() => {
+    const userAgent = navigator.userAgent || navigator.vendor 
+    setIsMobile(/iPhone|iPod|iPad|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(userAgent));
+  }, []);
 
   const handleResize = () => {
     if (refContainer.current) {
       const width = refContainer.current.clientWidth; // Usar clientWidth del contenedor padre
       const height = refContainer.current.clientHeight; // Usar clientHeight del contenedor padre
-      // debemos establecer un height minimo en caso de que el contenedor padre sea muy pequeño
-      if (height < 200) {
-        console.log('height', height)
-      }
-      console.log('width', width)
       setDimensiones({ width, height });
     }
   };
@@ -93,14 +93,20 @@ const LineChart = ({
         height='100%'
         overflow={"visible"}
         onMouseMove={(e) => {
-          if (showAllPoints) return;
+          if (showAllPoints || isMobile) return;
+          // si estamos en mobile no mostramos el punto
           handleMouseMovePoint(e);
           setShowPoint(true);
         }}
         onMouseLeave={() => {
-          if (showAllPoints) return;
+          if (showAllPoints || isMobile) return;
           handleMouseLeavePoint();
           setShowPoint(false);
+        }}
+        onTouchStart={(e) => {
+          if (showAllPoints) return;
+          handleTouchMovePoint(e);
+          setShowPoint(true);
         }}
       >
         {!hideXlabels && (

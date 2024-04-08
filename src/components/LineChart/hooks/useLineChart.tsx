@@ -98,6 +98,48 @@ const useLineChart = (lineSets: LineSet[], lineToShowPointInfo: number, precisio
   };
 
 
+  const handleTouchMovePoint = (e: React.TouchEvent<SVGSVGElement>) => {
+    if(e.touches.length === 0 ) return;
+    const touch = e.touches[0];
+    const svgRect = e.currentTarget.getBoundingClientRect();
+    const touchX = touch.clientX - svgRect.left; // Posición X del touch relativa al SVG
+    let closestPoint = null as null | { x: number; y: number };
+    let minDistance = Infinity;
+    // si lineToShowPointInfo no concuerda con algun index de lineSets, no se muestra el punto
+    if (lineToShowPointInfo < 0 || lineToShowPointInfo >= pointsSets.length) {
+      // retornar warning en la consola en inglés
+      return console.warn(
+        "The lineToShowPointInfo prop must be a valid index of the lineSets array."
+      );
+    }
+    pointsSets[lineToShowPointInfo]?.forEach((point) => {
+      const distance = Math.abs(point.x - touchX);
+      if (distance < minDistance) {
+        closestPoint = point;
+        minDistance = distance;
+      }
+    });
+    if (closestPoint) {
+      const indexPoint = pointsSets[lineToShowPointInfo].findIndex(
+        (point) => point.x === closestPoint?.x
+      );
+      setTargetPoint({
+        x: closestPoint.x,
+        y: closestPoint.y,
+        index: indexPoint,
+        visible: true,
+      });
+      setHoverPoint({
+        x: closestPoint.x,
+        y: closestPoint.y,
+        visible: true,
+        lineIndex: lineToShowPointInfo,
+      });
+    }
+  }
+
+  
+
   const handleMouseMovePoint = (e: React.MouseEvent<SVGSVGElement>) => {
     const svgRect = e.currentTarget.getBoundingClientRect();
     const mouseX = e.clientX - svgRect.left; // Posición X del mouse relativa al SVG
@@ -258,6 +300,7 @@ const useLineChart = (lineSets: LineSet[], lineToShowPointInfo: number, precisio
     setDimensiones,
     handleMouseMovePoint,
     handleMouseLeavePoint,
+    handleTouchMovePoint,
     generatePath: generatePathWithSmoothVerticesUntilIndex,
     generatePathDash: generatePath,
     generateBackgroundPath : generateCompleteBackgroundPathWithSmoothVertices,
