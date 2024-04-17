@@ -37,7 +37,6 @@ const ToolTip = ({
 }: ToolTipProps) => {
   const [tooltipPosition, setTooltipPosition] = React.useState({ x: 0, y: 0 });
   useEffect(() => {
-    // si el tooltip se sale del límite del svg, se ajusta su posición
     if (hoverPoint.x > limitSvg.width - 20) {
       setTooltipPosition({ x: hoverPoint.x - 100, y: hoverPoint.y + 20 });
     } else {

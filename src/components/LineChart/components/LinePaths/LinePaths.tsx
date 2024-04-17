@@ -27,10 +27,7 @@ const LinePaths = ({
   stroke,
   generateBackgroundPath,
 }: LinePathsProps) => {
-  // si estamos manejando muchsiiimos datos, el stroke debe ser 0.6
   const isBigData = points.length >= 800;
-
- 
   return (
     <React.Fragment key={index}>
       <path
@@ -50,7 +47,7 @@ const LinePaths = ({
         stroke={lineSets[index].strokeColor || "grey"}
         strokeWidth={stroke}
         fill="none"
-        strokeDasharray="5,5" // Esto crea el efecto de línea punteada
+        strokeDasharray="5,5"
       />
       <path
         key={index}
