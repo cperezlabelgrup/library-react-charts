@@ -1,7 +1,7 @@
 {
-  "name": "simple-react-linechart",
+  "name": "fede-react-charts",
   "version": "2.0.24",
-  "description": "this is a test for a linechart component",
+  "description": "Charts library for React",
   "main": "dist/cjs/index.js",
   "files": [
     "dist"
