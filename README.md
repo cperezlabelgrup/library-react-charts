@@ -1,4 +1,4 @@
-# Simple Line Chart
+# React Charts
 
 This is a library for creating line charts using React.
 
